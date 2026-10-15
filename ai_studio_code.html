@@ -1,0 +1,2231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280, initial-scale=1.0">
+<title>MJIIT UTM - AHU & Ventilation Animated Slide Deck (SMJP 4043)</title>
+<style>
+  :root {
+    --bg-dark: #070e1c;
+    --card-bg: #0e1b30;
+    --card-border: rgba(56, 189, 248, 0.16);
+    --cyan: #00d2ff;
+    --sky: #38bdf8;
+    --blue: #2563eb;
+    --green: #10b981;
+    --emerald: #34d399;
+    --amber: #f59e0b;
+    --red: #ef4444;
+    --crimson: #e11d48;
+    --purple: #a855f7;
+    --text: #f8fafc;
+    --subtext: #94a3b8;
+    --muted: #64748b;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 0;
+    min-width: 1280px;
+    background: radial-gradient(circle at 50% 0%, #102445 0%, var(--bg-dark) 75%);
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+
+  /* TOP HEADER / APP BAR */
+  header {
+    background: rgba(10, 20, 38, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--card-border);
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .institution-badge {
+    background: linear-gradient(135deg, #1e3a8a, #0284c7);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+
+  .header-title-block h1 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.3px;
+  }
+  .header-title-block p {
+    margin: 2px 0 0 0;
+    font-size: 11px;
+    color: var(--sky);
+  }
+
+  .header-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn {
+    background: #15243b;
+    color: var(--text);
+    border: 1px solid #334155;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+  }
+  .btn:hover {
+    background: #1e3353;
+    border-color: var(--sky);
+    color: var(--sky);
+  }
+  .btn.active {
+    background: var(--blue);
+    border-color: var(--sky);
+    color: white;
+  }
+
+  /* SLIDE NAVIGATION BAR */
+  .slide-nav-bar {
+    background: #091322;
+    padding: 8px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    overflow-x: auto;
+  }
+
+  .slide-pills {
+    display: flex;
+    gap: 6px;
+  }
+
+  .slide-pill {
+    padding: 6px 12px;
+    border-radius: 6px;
+    background: #112036;
+    border: 1px solid #1e3352;
+    color: var(--subtext);
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .slide-pill:hover {
+    background: #1b3050;
+    color: var(--sky);
+  }
+  .slide-pill.active {
+    background: linear-gradient(135deg, #0284c7, #2563eb);
+    color: white;
+    border-color: var(--sky);
+    box-shadow: 0 0 12px rgba(2, 132, 199, 0.4);
+  }
+
+  /* SLIDE VIEW CONTAINER */
+  main {
+    flex: 1;
+    padding: 24px;
+    max-width: 1380px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .slide-container {
+    display: none;
+    animation: fadeInSlide 0.35s ease-out forwards;
+  }
+  .slide-container.active {
+    display: block;
+  }
+  @keyframes fadeInSlide {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 16px 36px rgba(0,0,0,0.5);
+    border: 1px solid var(--card-border);
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .slide-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 12px;
+  }
+
+  .slide-tag {
+    font-size: 12px;
+    color: var(--sky);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .slide-title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .canvas-wrapper {
+    position: relative;
+    width: 100%;
+    background: #07101e;
+    border: 2px solid #1e2c44;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  canvas {
+    display: block;
+    width: 100%;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #081120;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* SLIDE 01: TITLE COVER HERO */
+  .hero-cover {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .hero-badge-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .hero-title {
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin: 0 0 10px 0;
+    background: linear-gradient(135deg, #ffffff 30%, #38bdf8 70%, #34d399 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    font-size: 18px;
+    color: var(--sky);
+    margin: 0 0 24px 0;
+    font-weight: 500;
+  }
+  .team-card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 720px;
+    margin: 30px auto;
+  }
+  .team-card {
+    background: #112036;
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: transform 0.2s;
+  }
+  .team-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--sky);
+  }
+  .team-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0284c7, #10b981);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 15px;
+    color: white;
+  }
+
+  /* SLIDE 02: 3-TIER EXECUTIVE SUMMARY */
+  .exec-card-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .exec-banner {
+    border-radius: 14px;
+    padding: 24px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .exec-banner:hover {
+    transform: scale(1.015);
+  }
+  .exec-banner.b1 { background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 8px 24px rgba(239,68,68,0.25); }
+  .exec-banner.b2 { background: linear-gradient(135deg, #0284c7, #0369a1); box-shadow: 0 8px 24px rgba(2,132,199,0.25); }
+  .exec-banner.b3 { background: linear-gradient(135deg, #059669, #047857); box-shadow: 0 8px 24px rgba(5,150,105,0.25); }
+
+  .exec-banner h3 { margin: 0 0 6px 0; font-size: 22px; font-weight: 800; }
+  .exec-banner p { margin: 0; font-size: 15px; opacity: 0.95; }
+  .arrow-indicator {
+    font-size: 20px;
+    color: rgba(255,255,255,0.7);
+    margin: 4px 0;
+    text-align: center;
+  }
+
+  /* SLIDE 02: CAV vs VAV COMPARISON */
+  .cav-vav-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .system-box {
+    background: #091424;
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+
+  /* SLIDE 03: TIMELINE */
+  .timeline-container {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 850px;
+    margin: 0 auto;
+    position: relative;
+    padding-left: 60px;
+  }
+  .timeline-spine {
+    position: absolute;
+    left: 24px;
+    top: 15px;
+    bottom: 25px;
+    width: 4px;
+    background: linear-gradient(to bottom, #64748b, #0284c7, #d97706, #10b981);
+    border-radius: 2px;
+  }
+  .timeline-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .timeline-item:hover {
+    transform: translateX(6px);
+  }
+  .timeline-node {
+    position: absolute;
+    left: -48px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    background: #0284c7;
+    box-shadow: 0 0 10px rgba(2,132,199,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .timeline-card {
+    flex: 1;
+    padding: 18px 24px;
+    border-radius: 10px;
+    color: white;
+  }
+  .tc-1960 { background: linear-gradient(135deg, #475569, #334155); }
+  .tc-1980 { background: linear-gradient(135deg, #0284c7, #0369a1); }
+  .tc-2000 { background: linear-gradient(135deg, #d97706, #b45309); }
+  .tc-2020 { background: linear-gradient(135deg, #059669, #047857); box-shadow: 0 6px 20px rgba(5,150,105,0.3); }
+
+  /* SLIDE 06 & 09 CHART GRIDS */
+  .dual-chart-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  /* CONTROLS */
+  .control-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 16px;
+    padding: 12px 18px;
+    background: #0a1526;
+    border-radius: 8px;
+  }
+
+  input[type=range] {
+    flex: 1;
+    height: 6px;
+    background: #1e293b;
+    border-radius: 4px;
+    outline: none;
+    accent-color: var(--sky);
+    cursor: pointer;
+  }
+
+  .info-tag {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 700;
+  }
+  .info-tag.amber { background: rgba(245,158,11,0.15); color: var(--amber); border: 1px solid rgba(245,158,11,0.3); }
+  .info-tag.green { background: rgba(16,185,129,0.15); color: var(--emerald); border: 1px solid rgba(16,185,129,0.3); }
+  .info-tag.red { background: rgba(239,68,68,0.15); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
+
+  /* COMPLIANCE BARS */
+  .bar-container {
+    height: 24px;
+    background: #1e293b;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    margin: 8px 0;
+  }
+  .bar-fill {
+    height: 100%;
+    transition: width 1s ease-out;
+  }
+
+  /* REFERENCE CARDS */
+  .ref-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .ref-card {
+    background: #0a1526;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-left: 3px solid var(--sky);
+    transition: transform 0.2s;
+  }
+  .ref-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--sky);
+  }
+</style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-left">
+      <span class="institution-badge">MJIIT • UTM</span>
+      <span class="info-tag" style="background:linear-gradient(135deg, #1d4ed8, #0284c7); color:#fff; font-weight:800; font-size:11px; padding:4px 10px; border:1px solid var(--sky);">GROUP 3</span>
+      <div class="header-title-block">
+        <h1>SMJP 4043 Air Conditioning & Mechanical Ventilation</h1>
+        <p>Group 3: AHU/FCU, Ventilation & Indoor Air Quality (Malaysian Tropical Climate)</p>
+      </div>
+    </div>
+    <div class="header-nav">
+      <button class="btn" onclick="prevSlide()">◀ Prev</button>
+      <span id="slideCounter" style="font-size:12px; font-weight:bold; min-width:85px; text-align:center;">Slide 01 / 09</span>
+      <button class="btn" onclick="nextSlide()">Next ▶</button>
+      <button class="btn active" id="playPauseBtn" onclick="togglePlayPause()">
+        <span id="playIcon">⏸</span> Auto-Play
+      </button>
+      <button class="btn" id="soundBtn" onclick="toggleSound()">
+        <span id="soundIcon">🔇</span> Audio
+      </button>
+      <button class="btn" style="background:#0284c7; border-color:var(--sky); color:white; font-weight:bold;" onclick="downloadPresentationHTML()">
+        💾 Save File
+      </button>
+    </div>
+  </header>
+
+  <!-- SLIDE PILLS NAVIGATION BAR -->
+  <div class="slide-nav-bar">
+    <div class="slide-pills">
+      <button class="slide-pill active" onclick="goToSlide(1)">01. Cover</button>
+      <button class="slide-pill" onclick="goToSlide(2)">02. CAV vs VAV</button>
+      <button class="slide-pill" onclick="goToSlide(3)">03. Evolution</button>
+      <button class="slide-pill" onclick="goToSlide(4)">04. Sequence</button>
+      <button class="slide-pill" onclick="goToSlide(5)">05. Equations</button>
+      <button class="slide-pill" onclick="goToSlide(6)">06. Overcooling Trap</button>
+      <button class="slide-pill" onclick="goToSlide(7)">07. DOAS & SSLC</button>
+      <button class="slide-pill" onclick="goToSlide(8)">08. MS 1525 Compliance</button>
+      <button class="slide-pill" onclick="goToSlide(9)">09. References</button>
+    </div>
+    <div style="font-size:11px; color:var(--sky); font-weight:600;">
+      Keyboard: ← / → keys navigate
+    </div>
+  </div>
+
+  <!-- MAIN PRESENTATION SLIDES -->
+  <main>
+
+    <!-- ==========================================
+         SLIDE 01: TITLE / COVER
+         ========================================== -->
+    <div class="slide-container active" id="slide-1">
+      <div class="card hero-cover">
+        <div class="hero-badge-row">
+          <span class="info-tag" style="background:linear-gradient(135deg, #1d4ed8, #0284c7); color:#fff; font-weight:800; padding:6px 16px; font-size:13px; border:1px solid var(--sky); box-shadow:0 0 12px rgba(2,132,199,0.5);">GROUP 3</span>
+          <span class="info-tag amber">Academic Session 2026/2027</span>
+          <span class="info-tag green">Semester 1 • Assignment 01</span>
+          <span class="info-tag sky" style="background:rgba(56,189,248,0.15); color:var(--sky);">Friday, 16 October 2026</span>
+        </div>
+
+        <h2 class="hero-title">Group 3: AHU/FCU, Ventilation & Indoor Air Quality</h2>
+        <p class="hero-sub">Energy-Efficient Decoupled Conditioning & Standards Compliance in Tropical High-Humidity Climates</p>
+
+        <div class="canvas-wrapper" style="height:170px; max-width:860px; margin:0 auto 24px auto;">
+          <canvas id="coverCanvas" height="170"></canvas>
+        </div>
+
+        <div class="team-card-grid">
+          <div class="team-card">
+            <div class="team-avatar">JH</div>
+            <div>
+              <div style="font-size:10px; color:var(--amber); font-weight:800; text-transform:uppercase;">Group 3 Member</div>
+              <div style="font-weight:bold; font-size:14px; color:#fff;">Ho Jia Hui</div>
+              <div style="font-size:12px; color:var(--sky); font-weight:700;">Student ID: A23MJ0133</div>
+              <div style="font-size:11px; color:var(--subtext); margin-top:2px;">Ventilation, IAQ & Malaysian Climate Focus</div>
+            </div>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar" style="background:linear-gradient(135deg, #8b5cf6, #0284c7);">YT</div>
+            <div>
+              <div style="font-size:10px; color:var(--amber); font-weight:800; text-transform:uppercase;">Group 3 Member</div>
+              <div style="font-weight:bold; font-size:14px; color:#fff;">Yaw Yi Ting</div>
+              <div style="font-size:12px; color:var(--sky); font-weight:700;">Student ID: A23MJ0125</div>
+              <div style="font-size:11px; color:var(--subtext); margin-top:2px;">Hardware & System Engineering Focus</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 02: OPERATING PRINCIPLES: CAV VS VAV
+         ========================================== -->
+    <div class="slide-container" id="slide-2">
+      <div class="card">
+        <div class="slide-header">
+          <div>
+            <span class="slide-tag">Slide 02</span>
+            <h2 class="slide-title">Operating Principles: CAV vs. VAV</h2>
+          </div>
+          <span class="info-tag amber">Fluid Dynamics & Flow Modulation</span>
+        </div>
+
+        <div class="cav-vav-grid">
+          <!-- CAV SYSTEM -->
+          <div class="system-box">
+            <div style="text-align:center; margin-bottom:10px;">
+              <h3 style="color:#38bdf8; font-size:16px; margin:0 0 2px 0; font-weight:800;">CAV System: Fixed Airflow (100% CFM)</h3>
+              <span style="font-size:13px; color:#94a3b8; font-weight:600;">Variable Supply Temperature</span>
+            </div>
+            <div class="canvas-wrapper" style="height:190px;">
+              <canvas id="cavCanvas" height="190"></canvas>
+            </div>
+            <div style="margin-top:12px; font-size:13px; color:#cbd5e1; line-height:1.7; padding-left:10px;">
+              <div>• <b>Constant Fan Energy</b> (No VFD speed modulation)</div>
+              <div>• <b>Overcools & Reheats</b> at partial thermal load</div>
+            </div>
+          </div>
+
+          <!-- VAV SYSTEM -->
+          <div class="system-box">
+            <div style="text-align:center; margin-bottom:10px;">
+              <h3 style="color:#38bdf8; font-size:16px; margin:0 0 2px 0; font-weight:800;">VAV System: Modulating Airflow (VFD)</h3>
+              <span style="font-size:13px; color:#94a3b8; font-weight:600;">Constant Supply Temperature (13°C)</span>
+            </div>
+            <div class="canvas-wrapper" style="height:190px;">
+              <canvas id="vavCanvas" height="190"></canvas>
+            </div>
+            <div style="margin-top:12px; font-size:13px; color:#34d399; line-height:1.7; padding-left:10px;">
+              <div>• <b id="vavPowerBullet">VFD Fan Power: 34.3%</b> (Dynamically scales with thermal demand)</div>
+              <div>• <b>VAV Damper Modulates Flow</b> to prevent overcooling</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="control-row">
+          <label style="font-size:12px; font-weight:700;">Simulate Building Thermal Load:</label>
+          <input type="range" id="vavLoadSlider" min="30" max="100" value="70" oninput="updateVavSim(this.value)">
+          <span id="vavLoadVal" class="info-tag green">70% Thermal Load (VAV Fan: 34.3% Power)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 03: EVOLUTION OF VENTILATION TECHNOLOGY
+         ========================================== -->
+    <div class="slide-container" id="slide-3">
+      <div class="card">
+        <div class="slide-header">
+          <div>
+            <span class="slide-tag">Slide 03</span>
+            <h2 class="slide-title">Evolution of Ventilation Technology</h2>
+          </div>
+          <span class="info-tag sky">60-Year Engineering Progression</span>
+        </div>
+
+        <div class="timeline-container">
+          <div class="timeline-spine"></div>
+
+          <!-- 1960s -->
+          <div class="timeline-item" onclick="selectEra('1960')">
+            <div class="timeline-node" style="background:#64748b;"></div>
+            <div class="timeline-card tc-1960">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <b style="font-size:16px;">1960s–70s: Fixed-Speed CAV</b>
+                <span class="info-tag red" style="background:rgba(0,0,0,0.3);">Baseline Waste</span>
+              </div>
+              <p style="margin:6px 0 0 0; font-size:13px; opacity:0.9;">
+                Single-speed supply blowers with constant CFM volume. High overcooling, severe humidity issues, and no capacity modulation.
+              </p>
+            </div>
+          </div>
+
+          <!-- 1980s -->
+          <div class="timeline-item" onclick="selectEra('1980')">
+            <div class="timeline-node" style="background:#0284c7;"></div>
+            <div class="timeline-card tc-1980">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <b style="font-size:16px;">1980s–90s: VFD-Driven VAV</b>
+                <span class="info-tag sky" style="background:rgba(0,0,0,0.3);">-30% Fan Power</span>
+              </div>
+              <p style="margin:6px 0 0 0; font-size:13px; opacity:0.9;">
+                Variable Frequency Drives (VFD) and terminal VAV boxes introduced dynamic CFM scaling according to thermal zone demand.
+              </p>
+            </div>
+          </div>
+
+          <!-- 2000s -->
+          <div class="timeline-item" onclick="selectEra('2000')">
+            <div class="timeline-node" style="background:#d97706;"></div>
+            <div class="timeline-card tc-2000">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <b style="font-size:16px;">2000s–10s: DOAS & Heat Pipes</b>
+                <span class="info-tag amber" style="background:rgba(0,0,0,0.3);">Decoupled Latent</span>
+              </div>
+              <p style="margin:6px 0 0 0; font-size:13px; opacity:0.9;">
+                Dedicated Outdoor Air Systems (DOAS) with wrap-around heat pipes decoupled sensible and latent loads, eliminating active reheat.
+              </p>
+            </div>
+          </div>
+
+          <!-- 2020s+ -->
+          <div class="timeline-item" onclick="selectEra('2020')">
+            <div class="timeline-node" style="background:#10b981;"></div>
+            <div class="timeline-card tc-2020">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <b style="font-size:16px;">2020s+: IoT CO2 Sensor DCV & AI</b>
+                <span class="info-tag green" style="background:rgba(0,0,0,0.3);">38.9% Energy Saved</span>
+              </div>
+              <p style="margin:6px 0 0 0; font-size:13px; opacity:0.9;">
+                Demand-Controlled Ventilation (DCV) guided by real-time IoT CO2 sensors, delivering precision IAQ and full MS 1525 / DOSH compliance.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 04: SYSTEM COMPONENTS & AIRFLOW SEQUENCE
+         ========================================== -->
+    <div class="slide-container" id="slide-4">
+      <div class="card">
+        <div class="slide-header">
+          <div>
+            <span class="slide-tag">Slide 04</span>
+            <h2 class="slide-title">System Components & Airflow Sequence</h2>
+          </div>
+          <span class="info-tag green">Interactive Flow Tunnel</span>
+        </div>
+
+        <div class="canvas-wrapper" style="height:220px;">
+          <canvas id="sequenceCanvas" height="220"></canvas>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(5, 1fr); gap:10px; margin-top:16px;">
+          <div style="background:#091526; padding:10px; border-radius:6px; border-left:3px solid var(--amber); font-size:11px;">
+            <b style="color:var(--amber);">1. Mixing Box</b><br>
+            32°C / 80% RH<br>
+            <span style="color:var(--muted)">OA + RA Blending</span>
+          </div>
+          <div style="background:#091526; padding:10px; border-radius:6px; border-left:3px solid var(--amber); font-size:11px;">
+            <b style="color:#eab308;">2. MERV 14 Filter</b><br>
+            ΔP = 130 Pa<br>
+            <span style="color:var(--muted)">Particulate Intercept</span>
+          </div>
+          <div style="background:#091526; padding:10px; border-radius:6px; border-left:3px solid var(--sky); font-size:11px;">
+            <b style="color:var(--sky);">3. Coil Dehumid.</b><br>
+            12.0°C Dew Point<br>
+            <span style="color:var(--muted)">Moisture Wringing</span>
+          </div>
+          <div style="background:#091526; padding:10px; border-radius:6px; border-left:3px solid var(--emerald); font-size:11px;">
+            <b style="color:var(--emerald);">4. VFD Plug Fan</b><br>
+            Impeller Pressurization<br>
+            <span style="color:var(--muted)">Cubic Law Power</span>
+          </div>
+          <div style="background:#091526; padding:10px; border-radius:6px; border-left:3px solid var(--cyan); font-size:11px;">
+            <b style="color:var(--cyan);">5. Zone VAV Box</b><br>
+            25°C / 50% RH<br>
+            <span style="color:var(--muted)">Comfort Delivery</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 05: ENGINEERING PERFORMANCE & EQUATIONS
+         ========================================== -->
+    <div class="slide-container" id="slide-5">
+      <div class="card">
+        <div class="slide-header">
+          <div>
+            <span class="slide-tag">Slide 05</span>
+            <h2 class="slide-title">Engineering Performance & Equations</h2>
+          </div>
+          <span class="info-tag amber">W ∝ N³ & Filter Resistance ΔP</span>
+        </div>
+
+        <div class="dual-chart-grid">
+          <!-- FAN CUBIC LAW -->
+          <div class="system-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <h3 style="color:var(--sky); font-size:15px; margin:0;">Fan Cubic Power Law: W₂ / W₁ = (N₂ / N₁)³</h3>
+              <span class="info-tag green" id="cubicBadgeTag">-48.8% at 80% Flow</span>
+            </div>
+            <div class="canvas-wrapper" style="height:270px;">
+              <canvas id="cubicGraphCanvas" height="270"></canvas>
+            </div>
+            <div class="control-row" style="margin-top:12px; padding:10px 14px;">
+              <label style="font-size:12px; font-weight:700;">Operating Flow (N):</label>
+              <input type="range" id="cubicSlider" min="40" max="100" value="80" oninput="updateCubicPlot(this.value)">
+              <span id="cubicReadout" style="font-size:12px; font-weight:bold; color:var(--emerald);">80% Flow → 51.2% Power (-48.8% Saved)</span>
+            </div>
+          </div>
+
+          <!-- FILTER DROP -->
+          <div class="system-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <h3 style="color:var(--amber); font-size:15px; margin:0;">Filter Static Pressure Drop ΔP</h3>
+              <button class="btn" style="padding:4px 10px; font-size:11px; background:#0284c7; border-color:var(--sky); color:#fff;" onclick="replayFilterAnimation()">🔄 Replay Bar Rise</button>
+            </div>
+            <div class="canvas-wrapper" style="height:270px;">
+              <canvas id="filterDropCanvas" height="270"></canvas>
+            </div>
+            <div style="display:flex; justify-content:space-around; align-items:center; margin-top:12px; font-size:12px; padding:8px 12px; background:#07101e; border-radius:6px; border:1px solid rgba(255,255,255,0.06);">
+              <span style="color:#10b981; font-weight:bold;">MERV 8: 62.5 Pa (Pre-filter)</span>
+              <span style="color:#ef4444; font-weight:bold;">ΔP Penalty: +67.5 Pa (+108%)</span>
+              <span style="color:#f59e0b; font-weight:bold;">MERV 14: 130.0 Pa (High-Eff)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 06: TROPICAL OVERCOOLING & REHEAT CHALLENGE
+         ========================================== -->
+    <div class="slide-container" id="slide-6">
+      <div class="card">
+        <div class="slide-header">
+          <div>
+            <span class="slide-tag">Slide 06</span>
+            <h2 class="slide-title">Tropical Overcooling & Reheat Challenge</h2>
+          </div>
+          <span class="info-tag red">Psychrometric Energy Trap</span>
+        </div>
+
+        <div class="canvas-wrapper" style="height:310px;">
+          <canvas id="overcoolingPsychroCanvas" height="310"></canvas>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; margin-top:14px;">
+          <div style="background:#091526; padding:12px; border-radius:6px; border-left:3px solid var(--red); font-size:12px;">
+            <b style="color:var(--red);">1. The Deep Cooling Dilemma</b>
+            <p style="margin:4px 0 0 0; color:var(--subtext); font-size:11px;">
+              Standard AHUs must chill air to 12.0°C just to wring out ambient water vapor from 21.0 g/kg down to 8.8 g/kg.
+            </p>
+          </div>
+          <div style="background:#091526; padding:12px; border-radius:6px; border-left:3px solid var(--red); font-size:12px;">
+            <b style="color:var(--red);">2. Zone Overcooling Penalty</b>
+            <p style="margin:4px 0 0 0; color:var(--subtext); font-size:11px;">
+              Direct 12°C supply drops room temperature to 23.8°C, breaching thermal comfort and causing sick building complaints.
+            </p>
+          </div>
+          <div style="background:#091526; padding:12px; border-radius:6px; border-left:3px solid var(--red); font-size:12px;">
+            <b style="color:var(--red);">3. Energy Reheat Waste</b>
+            <p style="margin:4px 0 0 0; color:var(--subtext); font-size:11px;">
+              Activating electric heaters to warm overcooled air wastes up to 37% of total HVAC power—a double penalty!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 07: EMERGING DEHUMIDIFICATION TECHNOLOGIES
+         ========================================== -->
+    <div class="slide-container" id="slide-7">
+      <div class="card">
+        <div class="slide-header">
+          <div>
+            <span class="slide-tag">Slide 07</span>
+            <h2 class="slide-title">Emerging Dehumidification Technologies</h2>
+          </div>
+          <span class="info-tag green">DOAS + SSLC Decoupled Architecture</span>
+        </div>
+
+        <div class="canvas-wrapper" style="height:220px;">
+          <canvas id="doasCanvas" height="220"></canvas>
+        </div>
+
+        <div style="background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.3); border-radius:8px; padding:12px; margin-top:16px; display:flex; justify-content:space-around; font-size:12px; font-weight:bold; color:var(--amber);">
+          <span>✓ Eliminates Overcooling & Reheat</span>
+          <span>✓ 16%–20% Total HVAC Electricity Savings</span>
+          <span>✓ MS 1525 & DOSH IAQ Compliant</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 08: MALAYSIAN APPLICATION & COMPLIANCE
+         ========================================== -->
+    <div class="slide-container" id="slide-8">
+      <div class="card">
+        <div class="slide-header">
+          <div>
+            <span class="slide-tag">Slide 08</span>
+            <h2 class="slide-title">Malaysian Application & Compliance</h2>
+          </div>
+          <span class="info-tag green">MS 1525:2014 & DOSH ICOP-IAQ 2010</span>
+        </div>
+
+        <div class="dual-chart-grid">
+          <!-- CHART A: ENERGY SAVINGS -->
+          <div class="system-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <h3 style="color:#fff; font-size:15px; margin:0; font-weight:700;">A. Energy Savings of Modern HVAC Technologies</h3>
+              <button class="btn" style="padding:4px 10px; font-size:11px; background:#0284c7; border-color:var(--sky); color:#fff;" onclick="replayComplianceAnimation()">🔄 Replay Animation</button>
+            </div>
+            <div class="canvas-wrapper" style="height:280px;">
+              <canvas id="savingsBarCanvas" height="280"></canvas>
+            </div>
+          </div>
+
+          <!-- CHART B: STANDARDS COMPLIANCE -->
+          <div class="system-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <h3 style="color:#fff; font-size:15px; margin:0; font-weight:700;">B. Malaysian Indoor Standards Compliance</h3>
+              <div style="font-size:11px; color:#cbd5e1; display:flex; gap:10px;">
+                <span style="color:#ef4444;">■ Conventional</span>
+                <span style="color:#10b981;">■ Modern DOAS/DCV</span>
+              </div>
+            </div>
+            <div class="canvas-wrapper" style="height:280px;">
+              <canvas id="complianceBarCanvas" height="280"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 09: ACADEMIC REFERENCES & STANDARDS
+         ========================================== -->
+    <div class="slide-container" id="slide-9">
+      <div class="card">
+        <div class="slide-header">
+          <div>
+            <span class="slide-tag">Slide 09</span>
+            <h2 class="slide-title">Academic References & Statutory Standards</h2>
+          </div>
+          <span class="info-tag sky">Peer-Reviewed Citations</span>
+        </div>
+
+        <div class="ref-grid">
+          <div class="ref-card">
+            <b style="color:#fff; font-size:13px;">Department of Occupational Safety and Health Malaysia (DOSH)</b><br>
+            <span style="color:var(--sky); font-weight:700;">ICOP-IAQ 2010</span> — Industry Code of Practice on Indoor Air Quality.<br>
+            <span style="color:var(--subtext); font-size:11px;">Mandates indoor CO2 ceiling ≤ 1000 ppm, TVOCs < 3000 ppb, and ventilation rates.</span>
+          </div>
+
+          <div class="ref-card">
+            <b style="color:#fff; font-size:13px;">Department of Standards Malaysia</b><br>
+            <span style="color:var(--sky); font-weight:700;">MS 1525:2014</span> — Code of practice on energy efficiency and use of renewable energy.<br>
+            <span style="color:var(--subtext); font-size:11px;">Sets non-residential building envelope limits, 23–26°C dry bulb, and 50%–70% RH comfort zone.</span>
+          </div>
+
+          <div class="ref-card">
+            <b style="color:#fff; font-size:13px;">Mustapha, M. A., Chanik, A., Ismaili, G., & Mohamed Pauzan, A. S. (2024)</b><br>
+            <span style="color:var(--emerald); font-weight:700;">Evaluation of DCV impact in tropical climates</span> — Research Square.<br>
+            <span style="color:var(--subtext); font-size:11px;">Field validated 38.9% building HVAC energy savings in Malaysian office towers with CO2 DCV.</span>
+          </div>
+
+          <div class="ref-card">
+            <b style="color:#fff; font-size:13px;">Tang, C., Sun, S., Li, S., & Li, C. (2025)</b><br>
+            <span style="color:var(--amber); font-weight:700;">Energy-saving optimization of MAU with heat exchangers</span> — Applied Thermal Engineering.<br>
+            <span style="color:var(--subtext); font-size:11px;">Proves passive two-phase heat pipe recovery boosts COP by 19.4% in humid climates.</span>
+          </div>
+
+          <div class="ref-card">
+            <b style="color:#fff; font-size:13px;">Teh, K. J. L., Razali, H., & Lim, C. H. (2025)</b><br>
+            <span style="color:#a855f7; font-weight:700;">Multi-zone thermal comfort and IAQ in a tropical hypermarket</span> — Buildings.<br>
+            <span style="color:var(--subtext); font-size:11px;">Identified severe overcooling (23.8°C) in conventional CAV systems and proposed VAV zone retrofit.</span>
+          </div>
+
+          <div class="ref-card">
+            <b style="color:#fff; font-size:13px;">Yang, S., Wan, M. P., Ng, B. F., Dubey, S., Henze, G. P., Chen, W., & Baskaran, K. (2020)</b><br>
+            <span style="color:var(--cyan); font-weight:700;">Model predictive control for DOAS decoupled HVAC</span> — Applied Energy.<br>
+            <span style="color:var(--subtext); font-size:11px;">Demonstrated 18.0% electrical savings by separating latent moisture condensation from sensible cooling.</span>
+          </div>
+        </div>
+
+        <div style="text-align:center; margin-top:24px; padding:14px; background:#0a1526; border-radius:8px;">
+          <b style="color:var(--emerald); font-size:14px;">MJIIT UTM • SMJP 4043 ACMV Assignment 01 Presentation Complete</b>
+          <p style="margin:4px 0 0 0; font-size:12px; color:var(--subtext);">
+            Thank you! Prepared by Ho Jia Hui (A23MJ0133) & Yaw Yi Ting (A23MJ0125).
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>MJIIT UTM • SMJP 4043 Air Conditioning & Mechanical Ventilation</span>
+    <span>Group 3 • Ho Jia Hui & Yaw Yi Ting</span>
+    <span>Auto-Play Presenter: 12s per slide (Toggleable)</span>
+  </footer>
+
+<script>
+/* =======================================================================
+   SLIDE DECK NAVIGATION & CONTROLLER
+   ======================================================================= */
+let currentSlide = 1;
+const totalSlides = 9;
+let autoPlay = true;
+let autoPlayTimer = null;
+const AUTO_PLAY_INTERVAL = 12000; // 12 seconds per slide
+
+function goToSlide(n) {
+  if (n < 1) n = 1;
+  if (n > totalSlides) n = totalSlides;
+  currentSlide = n;
+
+  for (let i = 1; i <= totalSlides; i++) {
+    const el = document.getElementById(`slide-${i}`);
+    if (el) el.classList.remove('active');
+  }
+  document.getElementById(`slide-${currentSlide}`)?.classList.add('active');
+
+  // Update pills
+  const pills = document.querySelectorAll('.slide-pill');
+  pills.forEach((p, idx) => {
+    if (idx + 1 === currentSlide) p.classList.add('active');
+    else p.classList.remove('active');
+  });
+
+  document.getElementById('slideCounter').innerText = `Slide ${currentSlide < 10 ? '0' + currentSlide : currentSlide} / 09`;
+
+  // Trigger canvas resizes for active slide
+  triggerCanvasResize();
+  restartAutoPlayTimer();
+}
+
+function nextSlide() {
+  if (currentSlide < totalSlides) goToSlide(currentSlide + 1);
+  else goToSlide(1); // loop
+}
+
+function prevSlide() {
+  if (currentSlide > 1) goToSlide(currentSlide - 1);
+  else goToSlide(totalSlides);
+}
+
+function togglePlayPause() {
+  autoPlay = !autoPlay;
+  const btn = document.getElementById('playPauseBtn');
+  const icon = document.getElementById('playIcon');
+  if (autoPlay) {
+    btn.classList.add('active');
+    icon.innerText = '⏸';
+    btn.innerHTML = `<span id="playIcon">⏸</span> Auto-Play`;
+    restartAutoPlayTimer();
+  } else {
+    btn.classList.remove('active');
+    icon.innerText = '▶';
+    btn.innerHTML = `<span id="playIcon">▶</span> Paused`;
+    if (autoPlayTimer) clearInterval(autoPlayTimer);
+  }
+}
+
+function restartAutoPlayTimer() {
+  if (autoPlayTimer) clearInterval(autoPlayTimer);
+  if (autoPlay) {
+    autoPlayTimer = setInterval(() => {
+      nextSlide();
+    }, AUTO_PLAY_INTERVAL);
+  }
+}
+
+// Keyboard arrow listeners
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') {
+    nextSlide();
+  } else if (e.key === 'ArrowLeft') {
+    prevSlide();
+  }
+});
+
+/* =======================================================================
+   AUDIO SYNTHESIZER
+   ======================================================================= */
+let audioCtx = null;
+let fanOsc = null;
+let fanGain = null;
+let audioEnabled = false;
+
+function initAudio() {
+  if (!audioCtx) {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (AudioContext) {
+      audioCtx = new AudioContext();
+      fanOsc = audioCtx.createOscillator();
+      fanGain = audioCtx.createGain();
+      fanOsc.type = 'sawtooth';
+      fanOsc.frequency.setValueAtTime(65, audioCtx.currentTime);
+
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(120, audioCtx.currentTime);
+
+      fanGain.gain.setValueAtTime(0, audioCtx.currentTime);
+      fanOsc.connect(filter);
+      filter.connect(fanGain);
+      fanGain.connect(audioCtx.destination);
+      fanOsc.start();
+    }
+  }
+}
+
+function toggleSound() {
+  audioEnabled = !audioEnabled;
+  const btn = document.getElementById('soundBtn');
+  if (audioEnabled) {
+    initAudio();
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+    btn.classList.add('active');
+    btn.innerHTML = `<span id="soundIcon">🔊</span> Audio On`;
+    if (fanGain && audioCtx) fanGain.gain.setTargetAtTime(0.03, audioCtx.currentTime, 0.05);
+  } else {
+    btn.classList.remove('active');
+    btn.innerHTML = `<span id="soundIcon">🔇</span> Audio`;
+    if (fanGain && audioCtx) fanGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.05);
+  }
+}
+
+/* =======================================================================
+   ANIMATION FOR EVERY SLIDE
+   ======================================================================= */
+let globalTime = 0;
+
+/* --- SLIDE 01: COVER PARTICLE BACKDROP --- */
+const coverCanvas = document.getElementById('coverCanvas');
+const coverCtx = coverCanvas.getContext('2d');
+const coverParticles = [];
+for (let i = 0; i < 40; i++) {
+  coverParticles.push({
+    x: Math.random() * 800,
+    y: Math.random() * 170,
+    vx: 1 + Math.random() * 2,
+    size: 2 + Math.random() * 2.5,
+    color: Math.random() > 0.5 ? '#38bdf8' : '#34d399'
+  });
+}
+
+function drawCover() {
+  const w = coverCanvas.width;
+  const h = coverCanvas.height;
+  coverCtx.clearRect(0, 0, w, h);
+
+  // Grid lines
+  coverCtx.strokeStyle = 'rgba(255,255,255,0.04)';
+  coverCtx.lineWidth = 1;
+  for (let x = 0; x < w; x += 40) {
+    coverCtx.beginPath();
+    coverCtx.moveTo(x, 0);
+    coverCtx.lineTo(x, h);
+    coverCtx.stroke();
+  }
+
+  // Draw tropical fluid streams
+  coverParticles.forEach(p => {
+    p.x += p.vx;
+    if (p.x > w + 10) p.x = -10;
+    coverCtx.fillStyle = p.color;
+    coverCtx.beginPath();
+    coverCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    coverCtx.fill();
+  });
+
+  // Animated center wave
+  coverCtx.strokeStyle = 'rgba(56, 189, 248, 0.35)';
+  coverCtx.lineWidth = 2;
+  coverCtx.beginPath();
+  for (let x = 0; x < w; x += 10) {
+    const y = h * 0.5 + Math.sin(x * 0.015 + globalTime * 0.05) * 20;
+    if (x === 0) coverCtx.moveTo(x, y);
+    else coverCtx.lineTo(x, y);
+  }
+  coverCtx.stroke();
+}
+
+
+
+/* --- SLIDE 02: CAV vs VAV DUAL SIMULATION --- */
+const cavCanvas = document.getElementById('cavCanvas');
+const cavCtx = cavCanvas.getContext('2d');
+const vavCanvas = document.getElementById('vavCanvas');
+const vavCtx = vavCanvas.getContext('2d');
+
+let vavLoad = 70; // %
+let cavFanAngle = 0;
+let vavFanAngle = 0;
+
+function updateVavSim(val) {
+  vavLoad = parseInt(val, 10);
+  const power = (Math.pow(vavLoad / 100, 3) * 100).toFixed(1);
+  document.getElementById('vavLoadVal').innerText = `${vavLoad}% Thermal Load (VAV Fan: ${power}% Power)`;
+  const bullet = document.getElementById('vavPowerBullet');
+  if (bullet) bullet.innerText = `VFD Fan Power: ${power}%`;
+}
+
+// CAV particles
+const cavParticles = [];
+for (let i = 0; i < 22; i++) {
+  cavParticles.push({ x: Math.random() * 450, y: 55 + Math.random() * 80, vx: 3.5 });
+}
+// VAV particles
+const vavParticles = [];
+for (let i = 0; i < 22; i++) {
+  vavParticles.push({ x: Math.random() * 450, y: 55 + Math.random() * 80, vx: 2 });
+}
+
+function drawCavVav() {
+  cavFanAngle += 0.25;
+  vavFanAngle += (vavLoad / 100) * 0.28;
+
+  // ----------------- 1. CAV SYSTEM -----------------
+  const cw = cavCanvas.width;
+  const ch = cavCanvas.height;
+  cavCtx.clearRect(0, 0, cw, ch);
+
+  // Outer Duct Tunnel
+  const dX = 15, dY = 30, dW = cw - 30, dH = ch - 60;
+  cavCtx.fillStyle = '#081322';
+  cavCtx.fillRect(dX, dY, dW, dH);
+  cavCtx.strokeStyle = '#334155';
+  cavCtx.lineWidth = 3;
+  cavCtx.strokeRect(dX, dY, dW, dH);
+
+  // Airflow centerline guides
+  cavCtx.strokeStyle = 'rgba(56, 189, 248, 0.4)';
+  cavCtx.lineWidth = 3;
+  cavCtx.beginPath();
+  cavCtx.moveTo(dX - 10, ch * 0.5);
+  cavCtx.lineTo(dX + 25, ch * 0.5);
+  cavCtx.stroke();
+
+  // Cooling Coil (Vertical Red Bar)
+  const cCoilX = dX + dW * 0.28;
+  cavCtx.strokeStyle = '#ef4444';
+  cavCtx.lineWidth = 5;
+  cavCtx.beginPath();
+  cavCtx.moveTo(cCoilX, dY + 6);
+  cavCtx.lineTo(cCoilX, dY + dH - 6);
+  cavCtx.stroke();
+
+  // Fan (Blue Circle with rotating impeller)
+  const cFanX = dX + dW * 0.52;
+  const cFanY = ch * 0.5;
+  const fRadius = 18;
+
+  cavCtx.fillStyle = '#0284c7';
+  cavCtx.beginPath();
+  cavCtx.arc(cFanX, cFanY, fRadius, 0, Math.PI * 2);
+  cavCtx.fill();
+  cavCtx.strokeStyle = '#38bdf8';
+  cavCtx.lineWidth = 2;
+  cavCtx.stroke();
+
+  // Rotating blades
+  cavCtx.save();
+  cavCtx.translate(cFanX, cFanY);
+  cavCtx.rotate(cavFanAngle);
+  for (let b = 0; b < 4; b++) {
+    cavCtx.rotate(Math.PI / 2);
+    cavCtx.strokeStyle = '#ffffff';
+    cavCtx.lineWidth = 2;
+    cavCtx.beginPath();
+    cavCtx.moveTo(0, 0);
+    cavCtx.lineTo(fRadius - 3, 0);
+    cavCtx.stroke();
+  }
+  cavCtx.restore();
+
+  // CAV Particles (Continuous fixed speed)
+  cavParticles.forEach(p => {
+    p.x += p.vx;
+    if (p.x > dX + dW - 8) p.x = dX + 5;
+    cavCtx.fillStyle = p.x < cCoilX ? '#fb923c' : '#38bdf8';
+    cavCtx.beginPath();
+    cavCtx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
+    cavCtx.fill();
+  });
+
+  // CAV Badge (Yellow box with bold dark text - perfectly centered)
+  const bW = Math.min(105, dW * 0.32);
+  const bH = 44;
+  const bX = dX + dW * 0.66;
+  const bY = ch * 0.5 - bH / 2;
+
+  cavCtx.fillStyle = '#fef08a';
+  cavCtx.fillRect(bX, bY, bW, bH);
+  cavCtx.strokeStyle = '#000000';
+  cavCtx.lineWidth = 1.5;
+  cavCtx.strokeRect(bX, bY, bW, bH);
+
+  cavCtx.fillStyle = '#000000';
+  cavCtx.textAlign = 'center';
+  cavCtx.font = 'bold 12px Segoe UI, sans-serif';
+  cavCtx.fillText('Coil Temp:', bX + bW / 2, bY + 18);
+  cavCtx.font = 'bold 14px Segoe UI, sans-serif';
+  cavCtx.fillText('12.0°C', bX + bW / 2, bY + 36);
+
+  // ----------------- 2. VAV SYSTEM -----------------
+  const vw = vavCanvas.width;
+  const vh = vavCanvas.height;
+  vavCtx.clearRect(0, 0, vw, vh);
+
+  const vdX = 15, vdY = 30, vdW = vw - 30, vdH = vh - 60;
+  vavCtx.fillStyle = '#081322';
+  vavCtx.fillRect(vdX, vdY, vdW, vdH);
+  vavCtx.strokeStyle = '#334155';
+  vavCtx.lineWidth = 3;
+  vavCtx.strokeRect(vdX, vdY, vdW, vdH);
+
+  vavCtx.strokeStyle = 'rgba(16, 185, 129, 0.4)';
+  vavCtx.lineWidth = 3;
+  vavCtx.beginPath();
+  vavCtx.moveTo(vdX - 10, vh * 0.5);
+  vavCtx.lineTo(vdX + 25, vh * 0.5);
+  vavCtx.stroke();
+
+  // Modulating Damper Blade (Green slanted)
+  const vDamperX = vdX + vdW * 0.30;
+  const dAngle = ((100 - vavLoad) / 100) * (Math.PI / 3);
+  vavCtx.strokeStyle = '#059669';
+  vavCtx.lineWidth = 5;
+  vavCtx.beginPath();
+  vavCtx.moveTo(vDamperX, vdY + 10);
+  vavCtx.lineTo(vDamperX + Math.cos(dAngle) * 35, vdY + 10 + Math.sin(dAngle) * (vdH - 20));
+  vavCtx.stroke();
+
+  // Fan (Green Circle with rotating impeller)
+  const vFanX = vdX + vdW * 0.52;
+  const vFanY = vh * 0.5;
+
+  vavCtx.fillStyle = '#059669';
+  vavCtx.beginPath();
+  vavCtx.arc(vFanX, vFanY, fRadius, 0, Math.PI * 2);
+  vavCtx.fill();
+  vavCtx.strokeStyle = '#34d399';
+  vavCtx.lineWidth = 2;
+  vavCtx.stroke();
+
+  vavCtx.save();
+  vavCtx.translate(vFanX, vFanY);
+  vavCtx.rotate(vavFanAngle);
+  for (let b = 0; b < 4; b++) {
+    vavCtx.rotate(Math.PI / 2);
+    vavCtx.strokeStyle = '#ffffff';
+    vavCtx.lineWidth = 2;
+    vavCtx.beginPath();
+    vavCtx.moveTo(0, 0);
+    vavCtx.lineTo(fRadius - 3, 0);
+    vavCtx.stroke();
+  }
+  vavCtx.restore();
+
+  // VAV Particles (modulate speed with vavLoad)
+  const vSpeed = 0.8 + (vavLoad / 100) * 3.0;
+  vavParticles.forEach(p => {
+    p.x += vSpeed;
+    if (p.x > vdX + vdW - 8) p.x = vdX + 5;
+    vavCtx.fillStyle = '#34d399';
+    vavCtx.beginPath();
+    vavCtx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
+    vavCtx.fill();
+  });
+
+  // VAV Badge (Light green box with bold dark green text - perfectly centered)
+  const vbW = Math.min(115, vdW * 0.35);
+  const vbH = 44;
+  const vbX = vdX + vdW * 0.64;
+  const vbY = vh * 0.5 - vbH / 2;
+
+  vavCtx.fillStyle = '#dcfce7';
+  vavCtx.fillRect(vbX, vbY, vbW, vbH);
+  vavCtx.strokeStyle = '#059669';
+  vavCtx.lineWidth = 1.5;
+  vavCtx.strokeRect(vbX, vbY, vbW, vbH);
+
+  vavCtx.fillStyle = '#065f46';
+  vavCtx.textAlign = 'center';
+  vavCtx.font = 'bold 12px Segoe UI, sans-serif';
+  vavCtx.fillText('Supply Air:', vbX + vbW / 2, vbY + 18);
+  vavCtx.font = 'bold 13px Segoe UI, sans-serif';
+  vavCtx.fillText('13.0°C (Const)', vbX + vbW / 2, vbY + 36);
+}
+/* --- SLIDE 04: SEQUENCE ANIMATION --- */
+const seqCanvas = document.getElementById('sequenceCanvas');
+const seqCtx = seqCanvas.getContext('2d');
+const seqParticles = [];
+for (let i = 0; i < 35; i++) {
+  seqParticles.push({
+    x: Math.random() * 800,
+    y: 70 + Math.random() * 80,
+    vx: 2.2
+  });
+}
+
+function drawSequence() {
+  const w = seqCanvas.width;
+  const h = seqCanvas.height;
+  seqCtx.clearRect(0, 0, w, h);
+
+  // Outer tunnel
+  seqCtx.fillStyle = '#060d17';
+  seqCtx.fillRect(20, 40, w - 40, h - 80);
+  seqCtx.strokeStyle = '#334155';
+  seqCtx.lineWidth = 2.5;
+  seqCtx.strokeRect(20, 40, w - 40, h - 80);
+
+  // 5 Components
+  const comps = [
+    { name: '1. Mixing', x: w * 0.08, col: '#f59e0b', sub: '32°C / 80%' },
+    { name: '2. MERV 14', x: w * 0.28, col: '#eab308', sub: 'Filter ΔP' },
+    { name: '3. Coil Dehumid', x: w * 0.48, col: '#0284c7', sub: '12°C Dew' },
+    { name: '4. VFD Fan', x: w * 0.68, col: '#10b981', sub: 'Blower' },
+    { name: '5. Zone VAV', x: w * 0.86, col: '#00d2ff', sub: '25°C / 50%' }
+  ];
+
+  comps.forEach((c, idx) => {
+    seqCtx.fillStyle = c.col;
+    seqCtx.fillRect(c.x, 50, 42, h - 100);
+    seqCtx.strokeStyle = '#fff';
+    seqCtx.lineWidth = 1;
+    seqCtx.strokeRect(c.x, 50, 42, h - 100);
+
+    seqCtx.fillStyle = '#fff';
+    seqCtx.font = 'bold 9px Segoe UI';
+    seqCtx.fillText(c.name, c.x - 4, 32);
+
+    // Arrow to next
+    if (idx < comps.length - 1) {
+      seqCtx.fillStyle = 'rgba(255,255,255,0.4)';
+      seqCtx.fillText('➔', c.x + 55, h * 0.5 + 4);
+    }
+  });
+
+  // Water condensation droplets dripping from coil
+  const dripY = 80 + ((globalTime * 2.5) % (h - 120));
+  seqCtx.fillStyle = '#38bdf8';
+  seqCtx.beginPath();
+  seqCtx.arc(w * 0.48 + 21, dripY, 3, 0, Math.PI * 2);
+  seqCtx.fill();
+
+  // Airflow particles
+  seqParticles.forEach(p => {
+    p.x += p.vx;
+    if (p.x > w - 30) p.x = 25;
+    seqCtx.fillStyle = p.x < w * 0.48 ? '#fb923c' : '#38bdf8';
+    seqCtx.beginPath();
+    seqCtx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
+    seqCtx.fill();
+  });
+}
+
+/* --- SLIDE 05: DUAL PERFORMANCE CHARTS --- */
+const cubicGraphCanvas = document.getElementById('cubicGraphCanvas');
+const cubicGraphCtx = cubicGraphCanvas.getContext('2d');
+const filterDropCanvas = document.getElementById('filterDropCanvas');
+const filterDropCtx = filterDropCanvas.getContext('2d');
+
+let curN = 80;
+function updateCubicPlot(val) {
+  curN = parseInt(val, 10);
+  const pwr = (Math.pow(curN / 100, 3) * 100).toFixed(1);
+  const saved = (100 - pwr).toFixed(1);
+  document.getElementById('cubicReadout').innerText = `${curN}% Flow → ${pwr}% Power (-${saved}% Saved)`;
+  const badge = document.getElementById('cubicBadgeTag');
+  if (badge) badge.innerText = `-${saved}% at ${curN}% Flow`;
+  drawCubicPlot();
+}
+
+function drawCubicPlot() {
+  const w = cubicGraphCanvas.width;
+  const h = cubicGraphCanvas.height;
+  cubicGraphCtx.clearRect(0, 0, w, h);
+
+  const pL = 55, pR = 25, pT = 32, pB = 44;
+  const gw = w - pL - pR;
+  const gh = h - pT - pB;
+
+  // Title
+  cubicGraphCtx.fillStyle = '#fff';
+  cubicGraphCtx.font = 'bold 13px Segoe UI, sans-serif';
+  cubicGraphCtx.textAlign = 'center';
+  cubicGraphCtx.fillText('Fan Cubic Power Law', pL + gw / 2, 20);
+
+  // Y-axis label: Fan Power (%)
+  cubicGraphCtx.save();
+  cubicGraphCtx.translate(16, pT + gh / 2);
+  cubicGraphCtx.rotate(-Math.PI / 2);
+  cubicGraphCtx.fillStyle = '#cbd5e1';
+  cubicGraphCtx.font = '11px Segoe UI, sans-serif';
+  cubicGraphCtx.textAlign = 'center';
+  cubicGraphCtx.fillText('Fan Power (%)', 0, 0);
+  cubicGraphCtx.restore();
+
+  // X-axis label: Airflow Rate (%)
+  cubicGraphCtx.fillStyle = '#cbd5e1';
+  cubicGraphCtx.font = '11px Segoe UI, sans-serif';
+  cubicGraphCtx.textAlign = 'center';
+  cubicGraphCtx.fillText('Airflow Rate (%)', pL + gw / 2, h - 8);
+
+  // Grid & Y Ticks (0, 20, 40, 60, 80, 100)
+  cubicGraphCtx.textAlign = 'right';
+  cubicGraphCtx.font = '10px Segoe UI, sans-serif';
+  for (let p = 0; p <= 100; p += 20) {
+    const y = (h - pB) - (p / 100) * gh;
+    cubicGraphCtx.strokeStyle = 'rgba(255,255,255,0.08)';
+    cubicGraphCtx.lineWidth = 1;
+    cubicGraphCtx.setLineDash([3, 3]);
+    cubicGraphCtx.beginPath();
+    cubicGraphCtx.moveTo(pL, y);
+    cubicGraphCtx.lineTo(w - pR, y);
+    cubicGraphCtx.stroke();
+    cubicGraphCtx.setLineDash([]);
+
+    cubicGraphCtx.fillStyle = '#94a3b8';
+    cubicGraphCtx.fillText(`${p}`, pL - 8, y + 3);
+  }
+
+  // Grid & X Ticks (40, 60, 80, 100)
+  cubicGraphCtx.textAlign = 'center';
+  for (let n = 40; n <= 100; n += 20) {
+    const x = pL + ((n - 40) / 60) * gw;
+    cubicGraphCtx.strokeStyle = 'rgba(255,255,255,0.08)';
+    cubicGraphCtx.lineWidth = 1;
+    cubicGraphCtx.setLineDash([3, 3]);
+    cubicGraphCtx.beginPath();
+    cubicGraphCtx.moveTo(x, pT);
+    cubicGraphCtx.lineTo(x, h - pB);
+    cubicGraphCtx.stroke();
+    cubicGraphCtx.setLineDash([]);
+
+    cubicGraphCtx.fillStyle = '#94a3b8';
+    cubicGraphCtx.fillText(`${n}`, x, h - pB + 16);
+  }
+
+  // Outer plot frame
+  cubicGraphCtx.strokeStyle = 'rgba(255,255,255,0.2)';
+  cubicGraphCtx.lineWidth = 1.5;
+  cubicGraphCtx.strokeRect(pL, pT, gw, gh);
+
+  // Draw Full Cubic Curve W = (N/100)^3 * 100
+  cubicGraphCtx.strokeStyle = '#0284c7';
+  cubicGraphCtx.lineWidth = 3.5;
+  cubicGraphCtx.beginPath();
+  for (let n = 40; n <= 100; n += 0.5) {
+    const pwr = Math.pow(n / 100, 3) * 100;
+    const nx = pL + ((n - 40) / 60) * gw;
+    const ny = (h - pB) - (pwr / 100) * gh;
+    if (n === 40) cubicGraphCtx.moveTo(nx, ny);
+    else cubicGraphCtx.lineTo(nx, ny);
+  }
+  cubicGraphCtx.stroke();
+
+  // Active Operating Point calculation
+  const curPwr = Math.pow(curN / 100, 3) * 100;
+  const curX = pL + ((curN - 40) / 60) * gw;
+  const curY = (h - pB) - (curPwr / 100) * gh;
+
+  // Drop lines (dashed red)
+  cubicGraphCtx.strokeStyle = 'rgba(239, 68, 68, 0.6)';
+  cubicGraphCtx.lineWidth = 1.5;
+  cubicGraphCtx.setLineDash([3, 3]);
+  cubicGraphCtx.beginPath();
+  cubicGraphCtx.moveTo(curX, h - pB);
+  cubicGraphCtx.lineTo(curX, curY);
+  cubicGraphCtx.lineTo(pL, curY);
+  cubicGraphCtx.stroke();
+  cubicGraphCtx.setLineDash([]);
+
+  // Red operating dot
+  cubicGraphCtx.fillStyle = '#ef4444';
+  cubicGraphCtx.beginPath();
+  cubicGraphCtx.arc(curX, curY, 6.5, 0, Math.PI * 2);
+  cubicGraphCtx.fill();
+  cubicGraphCtx.strokeStyle = '#ffffff';
+  cubicGraphCtx.lineWidth = 2;
+  cubicGraphCtx.stroke();
+
+  // Red pointer arrow and label matching user reference slide
+  const savedPercent = (100 - curPwr).toFixed(1);
+  const textX = Math.max(pL + 25, curX - 60);
+  const textY = Math.max(pT + 25, curY - 45);
+
+  // Arrow line from text to dot
+  cubicGraphCtx.strokeStyle = '#ef4444';
+  cubicGraphCtx.lineWidth = 2;
+  cubicGraphCtx.beginPath();
+  cubicGraphCtx.moveTo(textX + 25, textY + 18);
+  cubicGraphCtx.lineTo(curX - 4, curY - 4);
+  cubicGraphCtx.stroke();
+
+  // Arrowhead
+  const angle = Math.atan2(curY - 4 - (textY + 18), curX - 4 - (textX + 25));
+  cubicGraphCtx.fillStyle = '#ef4444';
+  cubicGraphCtx.beginPath();
+  cubicGraphCtx.moveTo(curX - 4, curY - 4);
+  cubicGraphCtx.lineTo(curX - 4 - 8 * Math.cos(angle - Math.PI / 6), curY - 4 - 8 * Math.sin(angle - Math.PI / 6));
+  cubicGraphCtx.lineTo(curX - 4 - 8 * Math.cos(angle + Math.PI / 6), curY - 4 - 8 * Math.sin(angle + Math.PI / 6));
+  cubicGraphCtx.fill();
+
+  // Callout text
+  cubicGraphCtx.textAlign = 'center';
+  cubicGraphCtx.fillStyle = '#ef4444';
+  cubicGraphCtx.font = 'bold 11px Segoe UI, sans-serif';
+  cubicGraphCtx.fillText(`${curN}% Flow = ${curPwr.toFixed(1)}% Power`, textX + 20, textY);
+  cubicGraphCtx.fillText(`(${savedPercent}% Energy Saved)`, textX + 20, textY + 13);
+}
+
+let filterAnimProgress = 0;
+let filterAnimSpeed = 0.025;
+
+function replayFilterAnimation() {
+  filterAnimProgress = 0;
+}
+
+function drawFilterDrop() {
+  const w = filterDropCanvas.width;
+  const h = filterDropCanvas.height;
+  filterDropCtx.clearRect(0, 0, w, h);
+
+  // Smooth rise animation
+  if (filterAnimProgress < 1) {
+    filterAnimProgress = Math.min(1, filterAnimProgress + filterAnimSpeed);
+  }
+
+  const pL = 50, pR = 25, pT = 32, pB = 44;
+  const gw = w - pL - pR;
+  const gh = h - pT - pB;
+
+  // Title
+  filterDropCtx.fillStyle = '#fff';
+  filterDropCtx.font = 'bold 13px Segoe UI, sans-serif';
+  filterDropCtx.textAlign = 'center';
+  filterDropCtx.fillText('Filter Static Pressure Drop ΔP', pL + gw / 2, 20);
+
+  // Y-axis label: Pressure Drop (Pa)
+  filterDropCtx.save();
+  filterDropCtx.translate(16, pT + gh / 2);
+  filterDropCtx.rotate(-Math.PI / 2);
+  filterDropCtx.fillStyle = '#cbd5e1';
+  filterDropCtx.font = '11px Segoe UI, sans-serif';
+  filterDropCtx.textAlign = 'center';
+  filterDropCtx.fillText('Pressure Drop (Pa)', 0, 0);
+  filterDropCtx.restore();
+
+  // Grid & Y Ticks (0 to 160 by 20)
+  filterDropCtx.textAlign = 'right';
+  filterDropCtx.font = '10px Segoe UI, sans-serif';
+  for (let pa = 0; pa <= 160; pa += 20) {
+    const y = (h - pB) - (pa / 160) * gh;
+    filterDropCtx.strokeStyle = 'rgba(255,255,255,0.08)';
+    filterDropCtx.lineWidth = 1;
+    filterDropCtx.setLineDash([3, 3]);
+    filterDropCtx.beginPath();
+    filterDropCtx.moveTo(pL, y);
+    filterDropCtx.lineTo(w - pR, y);
+    filterDropCtx.stroke();
+    filterDropCtx.setLineDash([]);
+
+    filterDropCtx.fillStyle = '#94a3b8';
+    filterDropCtx.fillText(`${pa}`, pL - 8, y + 3);
+  }
+
+  // Outer plot frame
+  filterDropCtx.strokeStyle = 'rgba(255,255,255,0.2)';
+  filterDropCtx.lineWidth = 1.5;
+  filterDropCtx.strokeRect(pL, pT, gw, gh);
+
+  // Bars width & positions
+  const barW = Math.min(70, gw * 0.24);
+  const bar1X = pL + gw * 0.28 - barW / 2;
+  const bar2X = pL + gw * 0.72 - barW / 2;
+
+  const currentVal1 = 62.5 * filterAnimProgress;
+  const currentVal2 = 130.0 * filterAnimProgress;
+
+  const bar1H = (currentVal1 / 160) * gh;
+  const bar2H = (currentVal2 / 160) * gh;
+
+  const bar1Y = (h - pB) - bar1H;
+  const bar2Y = (h - pB) - bar2H;
+
+  // Draw Bar 1: MERV 8 (Green gradient)
+  const grad1 = filterDropCtx.createLinearGradient(bar1X, bar1Y, bar1X + barW, bar1Y);
+  grad1.addColorStop(0, '#059669');
+  grad1.addColorStop(0.5, '#10b981');
+  grad1.addColorStop(1, '#059669');
+  filterDropCtx.fillStyle = grad1;
+  filterDropCtx.fillRect(bar1X, bar1Y, barW, bar1H);
+  filterDropCtx.strokeStyle = '#34d399';
+  filterDropCtx.lineWidth = 2;
+  filterDropCtx.strokeRect(bar1X, bar1Y, barW, bar1H);
+
+  // Shine cap
+  filterDropCtx.fillStyle = '#6ee7b7';
+  filterDropCtx.fillRect(bar1X + 2, bar1Y + 2, barW - 4, 3);
+
+  // Number above Bar 1
+  filterDropCtx.fillStyle = '#fff';
+  filterDropCtx.font = 'bold 13px Segoe UI, sans-serif';
+  filterDropCtx.textAlign = 'center';
+  filterDropCtx.fillText(`${currentVal1.toFixed(1)} Pa`, bar1X + barW / 2, bar1Y - 8);
+
+  // X-label for Bar 1
+  filterDropCtx.fillStyle = '#e2e8f0';
+  filterDropCtx.font = 'bold 11px Segoe UI, sans-serif';
+  filterDropCtx.fillText('MERV 8', bar1X + barW / 2, h - pB + 16);
+  filterDropCtx.fillStyle = '#94a3b8';
+  filterDropCtx.font = '10px Segoe UI, sans-serif';
+  filterDropCtx.fillText('(Pre-filter)', bar1X + barW / 2, h - pB + 28);
+
+  // Draw Bar 2: MERV 14 (Amber/Orange gradient)
+  const grad2 = filterDropCtx.createLinearGradient(bar2X, bar2Y, bar2X + barW, bar2Y);
+  grad2.addColorStop(0, '#d97706');
+  grad2.addColorStop(0.5, '#f59e0b');
+  grad2.addColorStop(1, '#d97706');
+  filterDropCtx.fillStyle = grad2;
+  filterDropCtx.fillRect(bar2X, bar2Y, barW, bar2H);
+  filterDropCtx.strokeStyle = '#fbbf24';
+  filterDropCtx.lineWidth = 2;
+  filterDropCtx.strokeRect(bar2X, bar2Y, barW, bar2H);
+
+  // Shine cap
+  filterDropCtx.fillStyle = '#fde68a';
+  filterDropCtx.fillRect(bar2X + 2, bar2Y + 2, barW - 4, 3);
+
+  // Number above Bar 2
+  filterDropCtx.fillStyle = '#fff';
+  filterDropCtx.font = 'bold 13px Segoe UI, sans-serif';
+  filterDropCtx.textAlign = 'center';
+  filterDropCtx.fillText(`${currentVal2.toFixed(1)} Pa`, bar2X + barW / 2, bar2Y - 8);
+
+  // X-label for Bar 2
+  filterDropCtx.fillStyle = '#e2e8f0';
+  filterDropCtx.font = 'bold 11px Segoe UI, sans-serif';
+  filterDropCtx.fillText('MERV 14', bar2X + barW / 2, h - pB + 16);
+  filterDropCtx.fillStyle = '#94a3b8';
+  filterDropCtx.font = '10px Segoe UI, sans-serif';
+  filterDropCtx.fillText('(High-Eff)', bar2X + barW / 2, h - pB + 28);
+
+  // ANIMATED DIFFERENCE BRACKET & PULSING CALLOUT
+  if (filterAnimProgress > 0.35) {
+    const pulseAlpha = Math.sin(globalTime * 0.12) * 0.25 + 0.75;
+    const diffPa = (currentVal2 - currentVal1).toFixed(1);
+
+    // Dotted projection line from bar 1 across
+    filterDropCtx.strokeStyle = `rgba(239, 68, 68, ${0.5 * pulseAlpha})`;
+    filterDropCtx.lineWidth = 1.5;
+    filterDropCtx.setLineDash([3, 3]);
+    filterDropCtx.beginPath();
+    filterDropCtx.moveTo(bar1X + barW, bar1Y);
+    filterDropCtx.lineTo(bar2X, bar1Y);
+    filterDropCtx.stroke();
+    filterDropCtx.setLineDash([]);
+
+    // Vertical dimension bracket
+    const bracketX = bar2X + barW + 10;
+    filterDropCtx.strokeStyle = `rgba(239, 68, 68, ${pulseAlpha})`;
+    filterDropCtx.lineWidth = 2;
+    filterDropCtx.beginPath();
+    filterDropCtx.moveTo(bracketX - 5, bar1Y);
+    filterDropCtx.lineTo(bracketX, bar1Y);
+    filterDropCtx.lineTo(bracketX, bar2Y);
+    filterDropCtx.lineTo(bracketX - 5, bar2Y);
+    filterDropCtx.stroke();
+
+    // Center Difference Callout Box
+    const midY = (bar1Y + bar2Y) / 2;
+    const boxW = Math.max(90, (bar2X - (bar1X + barW)) - 14);
+    const boxX = (bar1X + barW + bar2X) / 2 - boxW / 2;
+
+    filterDropCtx.fillStyle = `rgba(239, 68, 68, ${0.18 * pulseAlpha})`;
+    filterDropCtx.fillRect(boxX, midY - 14, boxW, 28);
+    filterDropCtx.strokeStyle = `rgba(239, 68, 68, ${0.7 * pulseAlpha})`;
+    filterDropCtx.lineWidth = 1.5;
+    filterDropCtx.strokeRect(boxX, midY - 14, boxW, 28);
+
+    filterDropCtx.fillStyle = '#ff6b6b';
+    filterDropCtx.font = 'bold 11px Segoe UI, sans-serif';
+    filterDropCtx.textAlign = 'center';
+    filterDropCtx.fillText(`+${diffPa} Pa`, boxX + boxW / 2, midY - 1);
+    filterDropCtx.font = '9px Segoe UI, sans-serif';
+    filterDropCtx.fillStyle = '#ffd1d1';
+    filterDropCtx.fillText('+108% Resistance', boxX + boxW / 2, midY + 11);
+  }
+}
+/* --- SLIDE 06: PSYCHROMETRIC OVERCOOLING TRAP --- */
+const overcoolingCanvas = document.getElementById('overcoolingPsychroCanvas');
+const overcoolingCtx = overcoolingCanvas.getContext('2d');
+
+function drawOvercooling() {
+  const w = overcoolingCanvas.width;
+  const h = overcoolingCanvas.height;
+  overcoolingCtx.clearRect(0, 0, w, h);
+
+  const pL = 65, pR = 30, pT = 38, pB = 46;
+  const gw = w - pL - pR;
+  const gh = h - pT - pB;
+
+  // Title in Red Bold matching original slide
+  overcoolingCtx.fillStyle = '#b91c1c';
+  overcoolingCtx.font = 'bold 14px Segoe UI, sans-serif';
+  overcoolingCtx.textAlign = 'center';
+  overcoolingCtx.fillText('Conventional AHU Overcooling & Reheat Loop', pL + gw / 2, 22);
+
+  // Y-axis label: Humidity Ratio (g/kg)
+  overcoolingCtx.save();
+  overcoolingCtx.translate(18, pT + gh / 2);
+  overcoolingCtx.rotate(-Math.PI / 2);
+  overcoolingCtx.fillStyle = '#cbd5e1';
+  overcoolingCtx.font = 'bold 11px Segoe UI, sans-serif';
+  overcoolingCtx.textAlign = 'center';
+  overcoolingCtx.fillText('Humidity Ratio (g/kg)', 0, 0);
+  overcoolingCtx.restore();
+
+  // X-axis label: Dry-Bulb Temperature (°C)
+  overcoolingCtx.fillStyle = '#cbd5e1';
+  overcoolingCtx.font = 'bold 11px Segoe UI, sans-serif';
+  overcoolingCtx.textAlign = 'center';
+  overcoolingCtx.fillText('Dry-Bulb Temperature (°C)', pL + gw / 2, h - 8);
+
+  // Y-axis Grid & Ticks (0, 5, 10, 15, 20, 25 g/kg)
+  overcoolingCtx.textAlign = 'right';
+  overcoolingCtx.font = '10px Segoe UI, sans-serif';
+  for (let hum = 0; hum <= 25; hum += 5) {
+    const y = (h - pB) - (hum / 25) * gh;
+    overcoolingCtx.strokeStyle = 'rgba(255,255,255,0.08)';
+    overcoolingCtx.lineWidth = 1;
+    overcoolingCtx.setLineDash([3, 3]);
+    overcoolingCtx.beginPath();
+    overcoolingCtx.moveTo(pL, y);
+    overcoolingCtx.lineTo(w - pR, y);
+    overcoolingCtx.stroke();
+    overcoolingCtx.setLineDash([]);
+
+    overcoolingCtx.fillStyle = '#94a3b8';
+    overcoolingCtx.fillText(`${hum}`, pL - 8, y + 3);
+  }
+
+  // X-axis Grid & Ticks (5, 10, 15, 20, 25, 30, 35 °C)
+  overcoolingCtx.textAlign = 'center';
+  for (let t = 5; t <= 35; t += 5) {
+    const x = pL + ((t - 5) / 30) * gw;
+    overcoolingCtx.strokeStyle = 'rgba(255,255,255,0.08)';
+    overcoolingCtx.lineWidth = 1;
+    overcoolingCtx.setLineDash([3, 3]);
+    overcoolingCtx.beginPath();
+    overcoolingCtx.moveTo(x, pT);
+    overcoolingCtx.lineTo(x, h - pB);
+    overcoolingCtx.stroke();
+    overcoolingCtx.setLineDash([]);
+
+    overcoolingCtx.fillStyle = '#94a3b8';
+    overcoolingCtx.fillText(`${t}`, x, h - pB + 16);
+  }
+
+  // Outer plot frame
+  overcoolingCtx.strokeStyle = 'rgba(255,255,255,0.25)';
+  overcoolingCtx.lineWidth = 1.5;
+  overcoolingCtx.strokeRect(pL, pT, gw, gh);
+
+  // State 1: Outdoor Mixed Air (32°C, 21.0 g/kg)
+  const s1X = pL + ((32.0 - 5) / 30) * gw;
+  const s1Y = (h - pB) - (21.0 / 25.0) * gh;
+
+  // State 2: Deep Coil Cooling (12.0°C, 8.8 g/kg)
+  const s2X = pL + ((12.0 - 5) / 30) * gw;
+  const s2Y = (h - pB) - (8.8 / 25.0) * gh;
+
+  // State 3: Zone Overcooled / Reheated (23.8°C, 8.8 g/kg)
+  const s3X = pL + ((23.8 - 5) / 30) * gw;
+  const s3Y = (h - pB) - (8.8 / 25.0) * gh;
+
+  // Connecting Thermodynamic Lines (Red)
+  overcoolingCtx.strokeStyle = '#dc2626';
+  overcoolingCtx.lineWidth = 4;
+  overcoolingCtx.beginPath();
+  overcoolingCtx.moveTo(s1X, s1Y);
+  overcoolingCtx.lineTo(s2X, s2Y);
+  overcoolingCtx.lineTo(s3X, s3Y);
+  overcoolingCtx.stroke();
+
+  // Draw 3 State Points
+  const pts = [
+    { x: s1X, y: s1Y, name: '1. Outdoor Mixed Air', sub: '(32°C, 21 g/kg)', offX: -90, offY: -22, align: 'right' },
+    { x: s2X, y: s2Y, name: '2. Deep Coil Cooling', sub: '(12°C Dewpoint)', offX: 12, offY: -35, align: 'left' },
+    { x: s3X, y: s3Y, name: '3. Zone Overcooled / Reheated', sub: '(23.8°C, 8.8 g/kg)', offX: 0, offY: 26, align: 'center' }
+  ];
+
+  pts.forEach(p => {
+    // Red dot with white halo
+    overcoolingCtx.fillStyle = '#dc2626';
+    overcoolingCtx.beginPath();
+    overcoolingCtx.arc(p.x, p.y, 7, 0, Math.PI * 2);
+    overcoolingCtx.fill();
+    overcoolingCtx.strokeStyle = '#ffffff';
+    overcoolingCtx.lineWidth = 2;
+    overcoolingCtx.stroke();
+
+    // Callout text with pill background
+    overcoolingCtx.textAlign = p.align;
+    overcoolingCtx.font = 'bold 11px Segoe UI, sans-serif';
+    overcoolingCtx.fillStyle = '#ffffff';
+    overcoolingCtx.fillText(p.name, p.x + p.offX, p.y + p.offY);
+    overcoolingCtx.font = '10px Segoe UI, sans-serif';
+    overcoolingCtx.fillStyle = '#fca5a5';
+    overcoolingCtx.fillText(p.sub, p.x + p.offX, p.y + p.offY + 13);
+  });
+
+  // Animated Tracer Dot cycling along the loop
+  const cycleFrac = (globalTime * 0.02) % 2; // 0..1 is 1->2, 1..2 is 2->3
+  let tracerX = s1X, tracerY = s1Y;
+  if (cycleFrac < 1) {
+    tracerX = s1X + (s2X - s1X) * cycleFrac;
+    tracerY = s1Y + (s2Y - s1Y) * cycleFrac;
+  } else {
+    const f = cycleFrac - 1;
+    tracerX = s2X + (s3X - s2X) * f;
+    tracerY = s2Y + (s3Y - s2Y) * f;
+  }
+  overcoolingCtx.fillStyle = '#fef08a';
+  overcoolingCtx.beginPath();
+  overcoolingCtx.arc(tracerX, tracerY, 4.5, 0, Math.PI * 2);
+  overcoolingCtx.fill();
+  overcoolingCtx.strokeStyle = '#b91c1c';
+  overcoolingCtx.lineWidth = 1.5;
+  overcoolingCtx.stroke();
+}
+/* --- SLIDE 07: DOAS + SSLC DECOUPLED ANIMATION --- */
+const doasCanvas = document.getElementById('doasCanvas');
+const doasCtx = doasCanvas.getContext('2d');
+const doasParticles = [];
+for (let i = 0; i < 28; i++) {
+  doasParticles.push({ x: Math.random() * 800, y: 70 + Math.random() * 80, vx: 2.2 });
+}
+
+function drawDoas() {
+  const w = doasCanvas.width;
+  const h = doasCanvas.height;
+  doasCtx.clearRect(0, 0, w, h);
+
+  const boxes = [
+    { title: 'Hot Humid Outdoor', sub: '32°C, 80% RH', col: '#fb923c', x: w * 0.05, w: 120 },
+    { title: 'DOAS Latent Coil', sub: '4–7°C CHW (Condenses)', col: '#0284c7', x: w * 0.32, w: 130 },
+    { title: 'Sensible Dry Coil', sub: '11°C CHW (No Overcool)', col: '#10b981', x: w * 0.60, w: 130 },
+    { title: 'Office Zone', sub: '25°C, 50% RH (CO2 < 800)', col: '#334155', x: w * 0.85, w: 100 }
+  ];
+
+  boxes.forEach((b, i) => {
+    doasCtx.fillStyle = 'rgba(15, 29, 50, 0.9)';
+    doasCtx.fillRect(b.x, 50, b.w, h - 100);
+    doasCtx.strokeStyle = b.col;
+    doasCtx.lineWidth = 2.5;
+    doasCtx.strokeRect(b.x, 50, b.w, h - 100);
+
+    doasCtx.fillStyle = b.col;
+    doasCtx.font = 'bold 11px Segoe UI';
+    doasCtx.fillText(b.title, b.x + 8, 80);
+    doasCtx.fillStyle = '#cbd5e1';
+    doasCtx.font = '10px Segoe UI';
+    doasCtx.fillText(b.sub, b.x + 8, 100);
+
+    if (i < boxes.length - 1) {
+      doasCtx.fillStyle = '#fff';
+      doasCtx.font = '14px Segoe UI';
+      doasCtx.fillText('➔', b.x + b.w + 12, h * 0.5 + 4);
+    }
+  });
+
+  // Moisture dripping animation under DOAS coil
+  const dripY = 120 + ((globalTime * 3) % 40);
+  doasCtx.fillStyle = '#38bdf8';
+  doasCtx.beginPath();
+  doasCtx.arc(w * 0.32 + 65, dripY, 3, 0, Math.PI * 2);
+  doasCtx.fill();
+  doasCtx.fillStyle = '#38bdf8';
+  doasCtx.font = 'bold 9px Segoe UI';
+  doasCtx.fillText('100% Moisture Condensing', w * 0.32 + 6, h - 18);
+
+  // Particles
+  doasParticles.forEach(p => {
+    p.x += p.vx;
+    if (p.x > w - 20) p.x = 20;
+    doasCtx.fillStyle = p.x < w * 0.32 ? '#fb923c' : (p.x < w * 0.60 ? '#38bdf8' : '#34d399');
+    doasCtx.beginPath();
+    doasCtx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
+    doasCtx.fill();
+  });
+}
+
+/* --- SLIDE 08: MALAYSIAN COMPLIANCE & SAVINGS BARS --- */
+const savingsBarCanvas = document.getElementById('savingsBarCanvas');
+const savingsBarCtx = savingsBarCanvas.getContext('2d');
+const complianceBarCanvas = document.getElementById('complianceBarCanvas');
+const complianceBarCtx = complianceBarCanvas.getContext('2d');
+
+let complianceAnimProgress = 0;
+const complianceAnimSpeed = 0.025;
+
+function replayComplianceAnimation() {
+  complianceAnimProgress = 0;
+}
+
+function drawSavingsBar() {
+  const w = savingsBarCanvas.width;
+  const h = savingsBarCanvas.height;
+  savingsBarCtx.clearRect(0, 0, w, h);
+
+  if (complianceAnimProgress < 1) {
+    complianceAnimProgress = Math.min(1, complianceAnimProgress + complianceAnimSpeed);
+  }
+
+  const pL = 180, pR = 40, pT = 25, pB = 40;
+  const gw = w - pL - pR;
+  const gh = h - pT - pB;
+
+  // X-axis label: HVAC Energy Reduction / COP Gain (%)
+  savingsBarCtx.fillStyle = '#cbd5e1';
+  savingsBarCtx.font = 'bold 11px Segoe UI, sans-serif';
+  savingsBarCtx.textAlign = 'center';
+  savingsBarCtx.fillText('HVAC Energy Reduction / COP Gain (%)', pL + gw / 2, h - 8);
+
+  // Vertical dashed gridlines (0, 10, 20, 30, 40%)
+  savingsBarCtx.textAlign = 'center';
+  savingsBarCtx.font = '10px Segoe UI, sans-serif';
+  for (let pct = 0; pct <= 40; pct += 10) {
+    const x = pL + (pct / 45) * gw;
+    savingsBarCtx.strokeStyle = 'rgba(255,255,255,0.08)';
+    savingsBarCtx.lineWidth = 1;
+    savingsBarCtx.setLineDash([3, 3]);
+    savingsBarCtx.beginPath();
+    savingsBarCtx.moveTo(x, pT);
+    savingsBarCtx.lineTo(x, h - pB);
+    savingsBarCtx.stroke();
+    savingsBarCtx.setLineDash([]);
+
+    savingsBarCtx.fillStyle = '#94a3b8';
+    savingsBarCtx.fillText(`${pct}`, x, h - pB + 16);
+  }
+
+  // Y-axis main axis line
+  savingsBarCtx.strokeStyle = 'rgba(255,255,255,0.2)';
+  savingsBarCtx.lineWidth = 1.5;
+  savingsBarCtx.beginPath();
+  savingsBarCtx.moveTo(pL, pT);
+  savingsBarCtx.lineTo(pL, h - pB);
+  savingsBarCtx.lineTo(w - pR, h - pB);
+  savingsBarCtx.stroke();
+
+  // 4 Technologies matching reference slide exactly
+  const items = [
+    { name: 'DOAS + SSLC (Article 3)', val: 18.0, col: '#b45309' },
+    { name: 'Separated Heat Pipe (SSRN)', val: 19.4, col: '#0d9488' },
+    { name: 'Two-Stage Solar Desiccant (Article 2)', val: 30.9, col: '#d97706' },
+    { name: 'CO2 DCV (Article 1)', val: 38.9, col: '#1e40af' }
+  ];
+
+  const barH = 26;
+  const rowSpacing = gh / 4;
+
+  items.forEach((it, idx) => {
+    const y = pT + idx * rowSpacing + (rowSpacing - barH) / 2;
+    const currentVal = it.val * complianceAnimProgress;
+    const barW = (currentVal / 45) * gw;
+
+    // Technology Name on Left (completely legible and clear)
+    savingsBarCtx.fillStyle = '#ffffff';
+    savingsBarCtx.font = 'bold 10px Segoe UI, sans-serif';
+    savingsBarCtx.textAlign = 'right';
+    savingsBarCtx.fillText(it.name, pL - 10, y + 17);
+
+    // Animated Expanding Bar
+    savingsBarCtx.fillStyle = it.col;
+    savingsBarCtx.fillRect(pL, y, barW, barH);
+    savingsBarCtx.strokeStyle = 'rgba(255,255,255,0.2)';
+    savingsBarCtx.lineWidth = 1;
+    savingsBarCtx.strokeRect(pL, y, barW, barH);
+
+    // Top shine highlight
+    savingsBarCtx.fillStyle = 'rgba(255,255,255,0.2)';
+    savingsBarCtx.fillRect(pL + 1, y + 1, barW - 2, 2);
+
+    // Percentage Label at end of bar
+    savingsBarCtx.fillStyle = '#ffffff';
+    savingsBarCtx.font = 'bold 11px Segoe UI, sans-serif';
+    savingsBarCtx.textAlign = 'left';
+    savingsBarCtx.fillText(`${currentVal.toFixed(1)}%`, pL + barW + 8, y + 17);
+  });
+}
+
+function drawComplianceBar() {
+  const w = complianceBarCanvas.width;
+  const h = complianceBarCanvas.height;
+  complianceBarCtx.clearRect(0, 0, w, h);
+
+  const pL = 40, pR = 25, pT = 25, pB = 40;
+  const gw = w - pL - pR;
+  const gh = h - pT - pB;
+
+  // Y-axis ticks (0, 200, 400, 600, 800, 1000, 1200)
+  complianceBarCtx.textAlign = 'right';
+  complianceBarCtx.font = '10px Segoe UI, sans-serif';
+  for (let v = 0; v <= 1200; v += 200) {
+    const y = (h - pB) - (v / 1200) * gh;
+    complianceBarCtx.strokeStyle = 'rgba(255,255,255,0.08)';
+    complianceBarCtx.lineWidth = 1;
+    complianceBarCtx.setLineDash([3, 3]);
+    complianceBarCtx.beginPath();
+    complianceBarCtx.moveTo(pL, y);
+    complianceBarCtx.lineTo(w - pR, y);
+    complianceBarCtx.stroke();
+    complianceBarCtx.setLineDash([]);
+
+    complianceBarCtx.fillStyle = '#94a3b8';
+    complianceBarCtx.fillText(`${v}`, pL - 6, y + 3);
+  }
+
+  // Frame lines
+  complianceBarCtx.strokeStyle = 'rgba(255,255,255,0.2)';
+  complianceBarCtx.lineWidth = 1.5;
+  complianceBarCtx.beginPath();
+  complianceBarCtx.moveTo(pL, pT);
+  complianceBarCtx.lineTo(pL, h - pB);
+  complianceBarCtx.lineTo(w - pR, h - pB);
+  complianceBarCtx.stroke();
+
+  // 3 Comparison Groups matching reference slide exactly
+  const groups = [
+    { label: 'RH (%)', sub: '[MS 1525 Max 70%]', conv: 77.2, mod: 58.0, maxScale: 1200, convHeightVal: 77.2, modHeightVal: 58.0, threshold: 70 },
+    { label: 'CO2 (ppm)', sub: '[DOSH Max 1000]', conv: 1150.0, mod: 780.0, maxScale: 1200, convHeightVal: 1150.0, modHeightVal: 780.0, threshold: 1000 },
+    { label: 'Temp (°C)', sub: '[MS 1525 23-26°C]', conv: 23.8, mod: 25.0, maxScale: 1200, convHeightVal: 23.8, modHeightVal: 25.0, threshold: null }
+  ];
+
+  const colW = 28;
+  const groupSpacing = gw / 3;
+
+  groups.forEach((g, idx) => {
+    const gCenterX = pL + idx * groupSpacing + groupSpacing / 2;
+    const b1X = gCenterX - colW - 3;
+    const b2X = gCenterX + 3;
+
+    // Scale calculation
+    const curConv = g.conv * complianceAnimProgress;
+    const curMod = g.mod * complianceAnimProgress;
+
+    const b1H = (curConv / 1200) * gh;
+    const b2H = (curMod / 1200) * gh;
+
+    const b1Y = (h - pB) - b1H;
+    const b2Y = (h - pB) - b2H;
+
+    // Bar 1: Conventional (Red gradient)
+    const gRed = complianceBarCtx.createLinearGradient(b1X, b1Y, b1X + colW, b1Y);
+    gRed.addColorStop(0, '#b91c1c');
+    gRed.addColorStop(0.5, '#dc2626');
+    gRed.addColorStop(1, '#b91c1c');
+    complianceBarCtx.fillStyle = gRed;
+    complianceBarCtx.fillRect(b1X, b1Y, colW, b1H);
+    complianceBarCtx.strokeStyle = '#f87171';
+    complianceBarCtx.lineWidth = 1;
+    complianceBarCtx.strokeRect(b1X, b1Y, colW, b1H);
+
+    // Value over Bar 1
+    complianceBarCtx.fillStyle = '#ffffff';
+    complianceBarCtx.font = 'bold 10px Segoe UI, sans-serif';
+    complianceBarCtx.textAlign = 'center';
+    complianceBarCtx.fillText(`${curConv.toFixed(1)}`, b1X + colW / 2, b1Y - 6);
+
+    // Bar 2: Modern DOAS/DCV (Green gradient)
+    const gGreen = complianceBarCtx.createLinearGradient(b2X, b2Y, b2X + colW, b2Y);
+    gGreen.addColorStop(0, '#047857');
+    gGreen.addColorStop(0.5, '#10b981');
+    gGreen.addColorStop(1, '#047857');
+    complianceBarCtx.fillStyle = gGreen;
+    complianceBarCtx.fillRect(b2X, b2Y, colW, b2H);
+    complianceBarCtx.strokeStyle = '#34d399';
+    complianceBarCtx.lineWidth = 1;
+    complianceBarCtx.strokeRect(b2X, b2Y, colW, b2H);
+
+    // Value over Bar 2
+    complianceBarCtx.fillStyle = '#ffffff';
+    complianceBarCtx.font = 'bold 10px Segoe UI, sans-serif';
+    complianceBarCtx.fillText(`${curMod.toFixed(1)}`, b2X + colW / 2, b2Y - 6);
+
+    // Category Label underneath
+    complianceBarCtx.fillStyle = '#ffffff';
+    complianceBarCtx.font = 'bold 10px Segoe UI, sans-serif';
+    complianceBarCtx.fillText(g.label, gCenterX, h - pB + 16);
+    complianceBarCtx.fillStyle = '#94a3b8';
+    complianceBarCtx.font = '9px Segoe UI, sans-serif';
+    complianceBarCtx.fillText(g.sub, gCenterX, h - pB + 28);
+  });
+}
+/* =======================================================================
+   RESIZE & ANIMATION TICK LOOP
+   ======================================================================= */
+function triggerCanvasResize() {
+  const canvases = [
+    coverCanvas, cavCanvas, vavCanvas,
+    seqCanvas, cubicGraphCanvas, filterDropCanvas,
+    overcoolingCanvas, doasCanvas, savingsBarCanvas, complianceBarCanvas
+  ];
+
+  canvases.forEach(c => {
+    if (c) {
+      const logicalHeight = Number(c.getAttribute('height'));
+      c.style.height = `${logicalHeight}px`;
+      const rect = c.getBoundingClientRect();
+      if (rect.width > 0) {
+        c.width = rect.width;
+        c.height = logicalHeight;
+      }
+    }
+  });
+
+  drawCubicPlot();
+  drawFilterDrop();
+  drawSavingsBar();
+  drawComplianceBar();
+}
+
+window.addEventListener('resize', triggerCanvasResize);
+
+function mainAnimationLoop() {
+  globalTime += 1;
+
+  if (currentSlide === 1) drawCover();
+  else if (currentSlide === 2) drawCavVav();
+  else if (currentSlide === 4) drawSequence();
+  else if (currentSlide === 5) { drawCubicPlot(); drawFilterDrop(); }
+  else if (currentSlide === 6) drawOvercooling();
+  else if (currentSlide === 7) drawDoas();
+  else if (currentSlide === 8) { drawSavingsBar(); drawComplianceBar(); }
+
+  requestAnimationFrame(mainAnimationLoop);
+}
+
+function downloadPresentationHTML() {
+  const htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+  const blob = new Blob([htmlContent], { type: 'text/html' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'MJIIT_UTM_AHU_Ventilation_Presentation.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
+}
+
+// Initial Boot
+window.addEventListener('load', () => {
+  triggerCanvasResize();
+  restartAutoPlayTimer();
+  requestAnimationFrame(mainAnimationLoop);
+});
+</script>
+</body>
+</html>
